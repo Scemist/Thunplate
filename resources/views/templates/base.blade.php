@@ -11,7 +11,7 @@
 	@vite('resources/css/app.css')
 </head>
 
-<body class="bg-gray-100 text-gray-800">
+<body class="bg-gray-100 text-gray-800 justify-center flex">
 
 	<body class="flex flex-nowrap justify-center">
 		<main class="flex-1 p-3 relative min-h-screen" style="max-width: 1200px">
