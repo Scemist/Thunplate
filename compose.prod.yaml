@@ -1,0 +1,40 @@
+name: loja-online
+
+networks:
+  internal:
+  database:
+
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: ./services/nginx/Dockerfile
+    restart: always
+    ports:
+      - "8000:443"
+    networks:
+      - internal
+    volumes_from:
+      - php
+
+  php:
+    build:
+      context: .
+      dockerfile: ./services/php/Dockerfile
+    restart: always
+    networks:
+      - internal
+      - database
+    volumes:
+      - /app
+      - /data/serverform-storage/archive:/app/storage/app/archive
+
+  postgres:
+    build:
+      context: .
+      dockerfile: ./services/postgres/Dockerfile
+    restart: always
+    networks:
+      - database
+    volumes:
+      - /data/serverform-postgres/data:/var/lib/postgresql/data

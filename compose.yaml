@@ -1,0 +1,48 @@
+name: thunplate
+
+networks:
+  internal:
+  database:
+
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: ./docker/nginx/Dockerfile.Dev
+    restart: unless-stopped
+    ports:
+      - "8765:80"
+      - "5173:5173"
+    networks:
+      - internal
+    volumes:
+      - .:/app
+
+  php:
+    build:
+      context: .
+      dockerfile: ./docker/php/Dockerfile.Dev
+    restart: unless-stopped
+    networks:
+      - internal
+      - database
+    volumes:
+      - .:/app
+
+  vite:
+    build:
+      context: .
+      dockerfile: ./docker/vite/Dockerfile.Dev
+    restart: unless-stopped
+    networks:
+      - internal
+    volumes:
+      - .:/app
+
+  postgres:
+    build:
+      context: .
+      dockerfile: ./docker/postgres/Dockerfile.Dev
+    restart: unless-stopped
+    networks:
+      - database

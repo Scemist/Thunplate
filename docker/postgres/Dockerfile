@@ -1,0 +1,3 @@
+FROM postgres:15-alpine3.18
+
+ENV POSTGRES_PASSWORD=djkhf108394hfwaoj13

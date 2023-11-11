@@ -1,0 +1,26 @@
+FROM php:8.2-fpm-alpine3.18
+
+WORKDIR /app
+
+RUN apk add \
+	composer \
+	npm \
+	libpq-dev
+
+RUN apk add \
+	php-tokenizer \
+	php-xml \
+	php-pdo \
+	php-session \
+	php-pdo_pgsql \
+	php-dom \
+	php-xmlwriter \
+	php-curl \
+	php-openssl \
+	php-mbstring \
+	php-gd \
+	php-fileinfo
+	
+# PHP Postgres PDO
+
+RUN docker-php-ext-install pdo_pgsql
